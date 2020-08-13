@@ -17,3 +17,4 @@ class SystemUser(AbstractUser):
         choices=position,
         default=interviewee,
     )
+
