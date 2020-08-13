@@ -7,7 +7,6 @@ User = get_user_model()
 
 
 class UserLoginForm(AuthenticationForm):
-    username = forms.EmailField()
 
     class Meta:
         fields = ['username', 'password']
