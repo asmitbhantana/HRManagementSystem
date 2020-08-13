@@ -5,6 +5,17 @@
     <title>User Login</title>
 </head>
 <body>
+{% if user.is_authenticated %}
+    <h4>Logged in user</h4>
+{% else %}
+    <h4>Log in</h4>
+{% endif %}
+{{ message }}
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Login</button>
+</form>
 
 </body>
 </html>

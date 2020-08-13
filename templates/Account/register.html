@@ -5,6 +5,12 @@
     <title>User Registration</title>
 </head>
 <body>
+<h4>Register User</h4>
 
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Sign Up</button>
+</form>
 </body>
 </html>
