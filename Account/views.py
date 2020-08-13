@@ -35,7 +35,7 @@ class UserLoginView(LoginView):
 
 
 class UserLogoutView(LogoutView):
-    next_page = reverse_lazy('blog:index')
+    next_page = reverse_lazy('dashboard:index')
 
 
 class UserSignupView(FormView):
@@ -60,6 +60,6 @@ class UserSignupView(FormView):
 
         messages.success(self.request, 'Registration Success Please Login')
 
-        return redirect('account:login')
+        return redirect('user:login')
 
 

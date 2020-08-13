@@ -38,6 +38,7 @@ INSTALLED_APPS = [
 
     'User',
     'Account',
+    'Dashboard',
 ]
 
 MIDDLEWARE = [
