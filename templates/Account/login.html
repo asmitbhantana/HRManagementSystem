@@ -10,7 +10,13 @@
 {% else %}
     <h4>Log in</h4>
 {% endif %}
-{{ message }}
+{% if messages %}
+    <ul>
+    {% for m in messages %}
+        <li>{{ m }}</li>
+    {% endfor %}
+    </ul>
+{% endif %}
 <form method="post">
     {% csrf_token %}
     {{ form.as_p }}

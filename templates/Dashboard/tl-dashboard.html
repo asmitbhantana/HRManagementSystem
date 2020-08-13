@@ -2,9 +2,15 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Team lead Dashboard</title>
 </head>
 <body>
-
+{% if user.is_authenticated %}
+    <a href="{% url "user:logout" %}">Logout</a>
+{% else %}
+    <a href="{% url "user:login" %}">Login</a>
+{% endif %}
+    <hr>
+    <h5>Applicants Scores:</h5>
 </body>
 </html>
