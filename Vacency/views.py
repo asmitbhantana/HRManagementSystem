@@ -1,3 +1,10 @@
 from django.shortcuts import render
+from django.views.generic import CreateView, UpdateView, DeleteView, ListView
+from Job.models import Jobs, Application
 
-# Create your views here.
+class ApplyJobView(CreateView):
+    model = Application
+
+
+
+
