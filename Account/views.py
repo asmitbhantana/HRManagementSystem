@@ -16,8 +16,8 @@ User = get_user_model()
 
 class UserLoginView(LoginView):
     form_class = UserLoginForm
-    template_name = 'Accounts/login.html'
-    success_url = reverse_lazy('blog:index')
+    template_name = 'Account/login.html'
+    success_url = reverse_lazy('dashboard:index')
 
     def get_context_data(self, **kwargs):
         context = super(UserLoginView, self).get_context_data(**kwargs)
@@ -25,12 +25,12 @@ class UserLoginView(LoginView):
         return context
 
     def form_valid(self, form):
-        user = authenticate(email=form.cleaned_data['username'],
+        user = authenticate(username=form.cleaned_data['username'],
                             password=form.cleaned_data['password'])
         if user:
             login(self.request, user)
         else:
-            form.add_error('email', "Error On Credentials")
+            form.add_error('username', "Error On Credentials")
         return super(UserLoginView, self).form_valid(form)
 
 
@@ -41,7 +41,7 @@ class UserLogoutView(LogoutView):
 class UserSignupView(FormView):
     form_class = UserSignupForm
     template_name = 'Account/register.html'
-    success_url = reverse_lazy('account:login')
+    success_url = reverse_lazy('user:login')
 
     def form_valid(self, form):
         cleaned_data = form.cleaned_data
