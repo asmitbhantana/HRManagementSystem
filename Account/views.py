@@ -14,25 +14,20 @@ class UserLoginView(LoginView):
     template_name = 'Account/login.html'
     success_url = reverse_lazy('dashboard:index')
 
-    # def get_context_data(self, **kwargs):
-    #     context = super(UserLoginView, self).get_context_data(**kwargs)
-    #     return context
-
-    def dispatch(self, request, *args, **kwargs):
-        print("in dispatch")
-        print(*args)
-        print(**kwargs)
-        return super(UserLoginView, self).dispatch(request, *args, **kwargs)
-
     def form_valid(self, form):
-
         user = authenticate(username=form.cleaned_data['username'],
                             password=form.cleaned_data['password'])
         if user:
             login(self.request, user)
         else:
             form.add_error('username', "Error On Credentials")
-        return super(UserLoginView, self).form_valid(form)
+        return redirect('dashboard:index')
+
+    def get(self, request, *args, **kwargs):
+        if request.user.is_authenticated:
+            return redirect('dashboard:index')
+        else:
+            super(UserLoginView, self).get(request, *args, **kwargs)
 
 
 class UserLogoutView(LogoutView):
@@ -56,3 +51,9 @@ class UserSignupView(FormView):
         messages.success(self.request, 'Registration Success Please Login')
 
         return redirect('user:login')
+
+    def get(self, request, *args, **kwargs):
+        if request.user.is_authenticated:
+            return redirect('dashboard:index')
+        else:
+            super(UserLoginView, self).get(request, *args, **kwargs)
