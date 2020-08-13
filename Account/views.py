@@ -27,7 +27,7 @@ class UserLoginView(LoginView):
         if request.user.is_authenticated:
             return redirect('dashboard:index')
         else:
-            super(UserLoginView, self).get(request, *args, **kwargs)
+            return super().get(request, *args, **kwargs)
 
 
 class UserLogoutView(LogoutView):
@@ -56,4 +56,4 @@ class UserSignupView(FormView):
         if request.user.is_authenticated:
             return redirect('dashboard:index')
         else:
-            super(UserLoginView, self).get(request, *args, **kwargs)
+            return super().get(request, *args, **kwargs)
