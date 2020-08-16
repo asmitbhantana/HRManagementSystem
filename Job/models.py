@@ -19,11 +19,11 @@ class Jobs(models.Model):
 
 
 class Application(models.Model):
-    job = models.OneToOneField(Jobs, on_delete=models.SET_DEFAULT, null=True, blank=False, default=0)
-    applicant = models.ForeignKey(User, on_delete=models.SET_DEFAULT, null=False, blank=False, related_name="applicant", default=1)
-    team_lead = models.OneToOneField(User, on_delete=models.SET_DEFAULT, null=False, blank=False,
-                                     related_name="team_lead", default=0)
+    job = models.ForeignKey(Jobs, on_delete=models.SET_DEFAULT, null=True, blank=False, default=0)
+    applicant = models.ForeignKey(User, on_delete=models.SET_DEFAULT, null=False, blank=False, related_name="applicant",
+                                  default=1)
     cv = models.FileField(upload_to="\media\cv", null=False, blank=False)
+    selected_for_exam = models.BooleanField(default=False)
 
     def __str__(self):
-        return self.job.title
+        return self.job.title + " by " + self.applicant.username
