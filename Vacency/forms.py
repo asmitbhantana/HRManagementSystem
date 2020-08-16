@@ -12,4 +12,4 @@ class JobForm(forms.ModelForm):
 class ApplicationForm(forms.ModelForm):
     class Meta:
         model = Application
-        fields = ['job', 'cv']
+        fields = ['cv']
