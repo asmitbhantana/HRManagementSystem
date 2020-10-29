@@ -51,7 +51,7 @@ def select_for_exam(request, application_id):
     current_application = Application.objects.get(id=application_id)
     subject = 'Activate Your Asmit Blogs Account'
     message = f"You have been selected for the Online interview! " \
-              f"Take exam ${current_site}/exam/"
+              f"Take exam ${current_site}/exam/${current_application.job.id}"
     print(current_application.applicant.email)
     send_mail(subject, message, EMAIL_HOST_USER, [current_application.applicant.email], fail_silently=False)
 

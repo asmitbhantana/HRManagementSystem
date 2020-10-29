@@ -26,4 +26,4 @@ class Question(models.Model):
     job = models.ForeignKey(Jobs, on_delete=models.SET_DEFAULT, default=8)
 
     def __str__(self):
-        return self.question + " -->"+ self.job.title
+        return self.question + " -->" + self.job.title

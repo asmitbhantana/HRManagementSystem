@@ -23,5 +23,6 @@ urlpatterns = [
     path('dashboard/', include('Dashboard.urls'), name="dashboard"),
     path('', index, name="index"),
     path('jobs/', include('Vacency.urls'), name="jobs"),
+    path('exam/', include('Exam.urls'), name="exam"),
 
 ]

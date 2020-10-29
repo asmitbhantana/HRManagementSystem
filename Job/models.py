@@ -15,7 +15,7 @@ class Jobs(models.Model):
     required_position = models.CharField(max_length=100, blank=False, null=False)
 
     def __str__(self):
-        return self.title
+        return self.required_position+". "+self.title
 
 
 class Application(models.Model):
@@ -26,4 +26,4 @@ class Application(models.Model):
     selected_for_exam = models.BooleanField(default=False)
 
     def __str__(self):
-        return self.job.title + " by " + self.applicant.username
+        return self.job.required_position+". "+self.job.title + " by " + self.applicant.username

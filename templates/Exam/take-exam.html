@@ -5,6 +5,19 @@
     <title>Take Exam</title>
 </head>
 <body>
-
+    Attending exam for {{ position }}. {{ title }}
 </body>
+<form method="post">
+    {% for q in questions %}
+        <div>
+            <p>q.question</p>
+            <div>
+                <input type="radio" value="{{ q.option_1 }}" name="{{ q.id }}">
+                <input type="radio" value="{{ q.option_2 }}" name="{{ q.id }}">
+                <input type="radio" value="{{ q.option_3 }}" name="{{ q.id }}">
+                <input type="radio" value="{{ q.option_4 }}" name="{{ q.id }}">
+            </div>
+        </div>
+    {% endfor %}
+</form>
 </html>

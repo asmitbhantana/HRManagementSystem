@@ -12,7 +12,7 @@
     {% for application in applied_jobs %}
         <p><i>({{ application.job.required_position }})</i> {{ application.job.title }}</p>
         {% if application.selected_for_exam %}
-            <a href="{% url "" job_id%}">Take Exam</a>
+            <a href="{% url "exam:take" application.job.id %}">Take Exam</a>
         {% else %}
             <p>Pending for approval...</p>
         {% endif %}
