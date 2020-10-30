@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User Login</title>
+</head>
+<body>
+{% if user.is_authenticated %}
+    <h4>Logged in user</h4>
+{% else %}
+    <h4>Log in</h4>
+{% endif %}
+{% if messages %}
+    <ul>
+    {% for m in messages %}
+        <li>{{ m }}</li>
+    {% endfor %}
+    </ul>
+{% endif %}
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Login</button>
+</form>
+
+</body>
+</html>

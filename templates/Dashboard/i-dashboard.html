@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard</title>
+</head>
+<body>
+{% if user.is_authenticated %}
+    <a href="{% url "user:logout" %}">Logout</a>
+    <h3>Welcome {{ user.username }},</h3>
+    <h1>Your Applied Jobs</h1>
+    {% for application in applied_jobs %}
+        <p><i>({{ application.job.required_position }})</i> {{ application.job.title }}</p>
+        {% if application.selected_for_exam %}
+            <a href="{% url "exam:take" application.job.id %}">Take Exam</a>
+        {% else %}
+            <p>Pending for approval...</p>
+        {% endif %}
+        <hr>
+    {% endfor %}
+{% else %}
+    <a href="{% url "user:login" %}">Login</a>
+{% endif %}
+<hr>
+
+<h1>Available Jobs</h1>
+<hr>
+{% for job in jobs %}
+    <div>
+        <h3>{{ job.title }}</h3>
+        <h5>{{ job.required_position }}</h5>
+        <h6>{{ job.team_lead }}</h6>
+        <a href="{% url 'jobs:apply' job.pk %}">Apply</a>
+        <hr>
+    </div>
+{% endfor %}
+<hr>
+
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Team lead Dashboard</title>
+</head>
+<body>
+{% if user.is_authenticated %}
+    <a href="{% url "user:logout" %}">Logout</a>
+    <h3>Welcome {{ user.username }},</h3>
+
+{% else %}
+    <a href="{% url "user:login" %}">Login</a>
+{% endif %}
+    <hr>
+    <h5>Applicants:</h5>
+    {% if applications|length < 1%}
+        <p>Nobody has applied</p>
+    {% else %}
+        {% for application in applications %}
+            <p>Job Applied on: {{ application.job.title }} by <b>{{ application.applicant.username }}</b></p>
+            {%  if  application.selected_for_exam %}
+                <i>Exam Sent</i>
+            {% else %}
+                <a href="{% url 'jobs:exam' application.id %}">Take Exam</a>
+{#                <p>Proceed to Interview Exam</p>#}
+            {% endif %}
+            <hr>
+        {% endfor %}
+    {% endif %}
+
+</body>
+</html>
