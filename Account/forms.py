@@ -7,7 +7,6 @@ User = get_user_model()
 
 
 class UserLoginForm(AuthenticationForm):
-
     class Meta:
         fields = ['username', 'password']
 
@@ -46,3 +45,8 @@ class UserSignupForm(UserCreationForm):
             'password1',
             'password2',
         ]
+
+
+class UserUpdateForm(forms.ModelForm):
+    class Meta:
+        model = User

@@ -2,7 +2,7 @@ from django.contrib import messages
 from django.contrib.auth.views import LoginView, LogoutView, AuthenticationForm
 from django.contrib.auth import authenticate, login, logout, get_user_model
 from django.shortcuts import redirect
-from django.views.generic import FormView
+from django.views.generic import FormView, ListView, UpdateView
 from django.urls import reverse_lazy
 from .forms import UserLoginForm, UserSignupForm
 
@@ -57,3 +57,20 @@ class UserSignupView(FormView):
             return redirect('dashboard:index')
         else:
             return super().get(request, *args, **kwargs)
+
+
+class ListUserView(ListView):
+    model = User
+    template_name = 'Account/list-user.html'
+
+    def get(self, request, *args, **kwargs):
+        if request.user.user_position != 'HR':
+            return redirect(reverse_lazy('dashboard:index'))
+
+        return super().get(request, *args, **kwargs)
+
+
+class EditUserView(UpdateView):
+    model = User
+    template_name = 'Account/edit-user.html'
+    form_class = User

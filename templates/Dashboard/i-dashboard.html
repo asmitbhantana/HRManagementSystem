@@ -12,6 +12,7 @@
     {% for application in applied_jobs %}
         <p><i>({{ application.job.required_position }})</i> {{ application.job.title }}</p>
         {% if application.selected_for_exam %}
+            <p>Approved for exam now take exam</p>
             <a href="{% url "exam:take" application.job.id %}">Take Exam</a>
         {% else %}
             <p>Pending for approval...</p>
@@ -25,15 +26,7 @@
 
 <h1>Available Jobs</h1>
 <hr>
-{% for job in jobs %}
-    <div>
-        <h3>{{ job.title }}</h3>
-        <h5>{{ job.required_position }}</h5>
-        <h6>{{ job.team_lead }}</h6>
-        <a href="{% url 'jobs:apply' job.pk %}">Apply</a>
-        <hr>
-    </div>
-{% endfor %}
+{% include 'Job/list-job.html' %}
 <hr>
 
 </body>

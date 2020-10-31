@@ -1,0 +1,14 @@
+<div class="job list">
+    {% for job in jobs %}
+         <p>--------</p>
+        <h6>{{ job.title }}</h6>
+        <p>{{ job.required_position }}</p>
+        {% if user.user_position == 'HR' %}
+            <a href="{% url 'jobs:update-job' pk=job.pk %}"> Edit</a>
+            <a href="{% url 'jobs:delete-job' pk=job.pk %}"> Delete</a>
+        {% elif user.user_position == 'I' %}
+            <a href="{% url 'vacancy:apply' pk=job.pk %}">Apply For Vacancy</a>
+        {% endif %}
+        <p>--------</p>
+    {% endfor %}
+</div>

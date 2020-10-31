@@ -20,11 +20,12 @@ def index(request):
             jobs = Jobs.objects.filter(team_lead=request.user)
             applications = Application.objects.filter(job_id__in=jobs)
             print(applications)
-            return render(request, 'Dashboard/tl-dashboard.html', context={'applications': applications})
+            return render(request, 'Dashboard/tl-dashboard.html',
+                          context={'jobs': jobs.all(), 'applications': applications})
 
         elif current_user.user_position == 'I':
             applied_application = Application.objects.filter(applicant_id=request.user.id)
-            applied_jobs=[]
+            applied_jobs = []
             for application in applied_application:
                 applied_jobs.append(application.job.id)
             jobs = jobs.exclude(id__in=applied_jobs)

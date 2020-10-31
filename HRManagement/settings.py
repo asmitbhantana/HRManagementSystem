@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     'User',
     'Account',
     'Dashboard',
-    'Vacency',
+    'Vacancy',
     'Job',
     'Question',
     'Exam',

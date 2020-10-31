@@ -22,7 +22,7 @@ class Application(models.Model):
     job = models.ForeignKey(Jobs, on_delete=models.SET_DEFAULT, null=True, blank=False, default=0)
     applicant = models.ForeignKey(User, on_delete=models.SET_DEFAULT, null=False, blank=False, related_name="applicant",
                                   default=1)
-    cv = models.FileField(upload_to="\media\cv", null=False, blank=False)
+    cv = models.FileField(upload_to="media\cv", null=False, blank=False)
     selected_for_exam = models.BooleanField(default=False)
 
     def __str__(self):

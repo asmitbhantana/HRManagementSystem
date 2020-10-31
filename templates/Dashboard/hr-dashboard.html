@@ -7,9 +7,14 @@
 <body>
 {% if user.is_authenticated %}
     <a href="{% url "user:logout" %}">Logout</a>
+    <a href="{% url 'jobs:create-job' %}" >Add job</a>
+    <a href="{% url 'jobs:create-job' %}" >Edit users</a>
     <h3>Welcome {{ user.username }},</h3>
     <hr>
-    <h4>Interviewee Scores:</h4>
+    <h4>Opened Vacancy</h4>
+    {% include 'Job/list-job.html' %}
+    <hr>
+    <h4>Interviewee Applied:</h4>
 
 {% else %}
     <a href="{% url "user:login" %}">Login</a>

@@ -17,6 +17,7 @@ class Answer(models.Model):
         max_length=1,
         choices=options,
     )
+
     for_application = models.ForeignKey(Application, on_delete=models.CASCADE, null=False, blank=False)
 
     def __str__(self):

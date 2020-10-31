@@ -21,8 +21,10 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('user/', include('Account.urls'), name='user'),
     path('dashboard/', include('Dashboard.urls'), name="dashboard"),
+    path('jobs/', include('Job.urls'), name="jobs"),
+
     path('', index, name="index"),
-    path('jobs/', include('Vacency.urls'), name="jobs"),
+    path('vacancy/', include('Vacancy.urls'), name="vacancy"),
     path('exam/', include('Exam.urls'), name="exam"),
 
 ]
