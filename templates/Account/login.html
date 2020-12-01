@@ -1,27 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>User Login</title>
-</head>
-<body>
-{% if user.is_authenticated %}
-    <h4>Logged in user</h4>
-{% else %}
-    <h4>Log in</h4>
-{% endif %}
-{% if messages %}
-    <ul>
-    {% for m in messages %}
-        <li>{{ m }}</li>
-    {% endfor %}
-    </ul>
-{% endif %}
-<form method="post">
+{% extends 'Account/lr-base.html' %}
+{% block lr_title %}
+    Login:
+{% endblock %}
+{% block lr_form %}
+ <form method="post">
     {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Login</button>
+  <div class="form-group">
+    <label for="exampleInputEmail1">Username</label>
+    <input type="text" name="username" class="form-control" id="username" aria-describedby="username" placeholder="Enter username">
+  </div>
+  <div class="form-group">
+    <label for="exampleInputPassword1">Password</label>
+    <input type="password" name="password" class="form-control" id="password" placeholder="Password">
+  </div>
+  <button type="submit" class="btn btn-primary">Login</button>
 </form>
-
-</body>
-</html>
+{% endblock %}
+{% block lr_help %}
+        <p>Don't have an account? <span><a href="{% url 'user:register' %}">Join now</a> </span></p>
+{% endblock %}

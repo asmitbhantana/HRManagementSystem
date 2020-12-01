@@ -1,33 +1,51 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Dashboard</title>
-</head>
-<body>
-{% if user.is_authenticated %}
-    <a href="{% url "user:logout" %}">Logout</a>
-    <h3>Welcome {{ user.username }},</h3>
-    <h1>Your Applied Jobs</h1>
-    {% for application in applied_jobs %}
-        <p><i>({{ application.job.required_position }})</i> {{ application.job.title }}</p>
-        {% if application.selected_for_exam %}
-            <p>Approved for exam now take exam</p>
-            <a href="{% url "exam:take" application.job.id %}">Take Exam</a>
-        {% else %}
-            <p>Pending for approval...</p>
-        {% endif %}
-        <hr>
-    {% endfor %}
-{% else %}
-    <a href="{% url "user:login" %}">Login</a>
-{% endif %}
-<hr>
+{% extends 'Dashboard/base-dashboard.html' %}
+{% block title_block %}
+    Google Jobs
+{% endblock title_block%}
 
+{% block nav_menu_item_block %}
+{% if user.is_authenticated %}
+     <li class="nav-item active">
+        <a class="nav-link" href="{% url "user:logout" %}">Logout <span class="sr-only">(current)</span></a>
+      </li>
+
+{% else %}
+     <li class="nav-item active">
+        <a class="nav-link" href="{% url "user:login" %}">Login <span class="sr-only">(current)</span></a>
+      </li>
+{% endif %}
+{% endblock nav_menu_item_block %}
+
+{% block body_block %}
 <h1>Available Jobs</h1>
 <hr>
 {% include 'Job/list-job.html' %}
 <hr>
+{% if user.is_authenticated %}
 
-</body>
-</html>
+    <h3>Welcome {{ user.username }},</h3>
+    <h1>Your Applied Jobs</h1>
+    {% for application in applied_jobs %}
+        <p><i>({{ application.job.required_position }})</i> {{ application.job.title }}</p>
+        {% if not application.exam_attended %}
+            {% if application.selected_for_exam %}
+                <p>Approved for exam now take exam</p>
+                <a href="{% url "exam:take" application.job.id %}">Take Exam</a>
+            {% elif application.canceled_for_exam %}
+                <p>Not selected for exam</p>
+            {% else %}
+                <p>Pending for approval...</p>
+            {% endif %}
+        {% else %}
+            <p>Exam Attended</p>
+            <p>Obtained Marks: {{ application.obtained_marks }}</p>
+       {% endif %}
+        <hr>
+    {% endfor %}
+{% else %}
+
+{% endif %}
+<hr>
+{% endblock body_block%}
+
+

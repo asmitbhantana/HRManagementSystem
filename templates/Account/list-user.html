@@ -6,5 +6,11 @@
 </head>
 <body>
     <h5>All User</h5>
+    {% for user in user_list %}
+        <h4>{{ user.username }}</h4>
+        <h5>{{ user.user_position }}</h5>
+        <a href="{% url 'user:edit' pk=user.pk %}">Edit</a>
+        <p>----</p>
+    {% endfor %}
 </body>
 </html>

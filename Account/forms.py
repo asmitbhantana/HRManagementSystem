@@ -50,3 +50,6 @@ class UserSignupForm(UserCreationForm):
 class UserUpdateForm(forms.ModelForm):
     class Meta:
         model = User
+        fields = [
+            'user_position'
+        ]

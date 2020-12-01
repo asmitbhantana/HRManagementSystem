@@ -14,7 +14,9 @@ def index(request):
     if request.user.is_authenticated:
         current_user = request.user
         if current_user.user_position == 'HR':
-            return render(request, 'Dashboard/hr-dashboard.html', context={'jobs': jobs.all()})
+            applications = Application.objects.filter(job_id__in=jobs.all())
+
+            return render(request, 'Dashboard/hr-dashboard.html', context={'jobs': jobs.all(), 'applications':applications})
 
         elif current_user.user_position == 'TL':
             jobs = Jobs.objects.filter(team_lead=request.user)
@@ -36,3 +38,7 @@ def index(request):
                           context={'jobs': jobs, 'applied_jobs': applied_application})
 
     return render(request, 'Dashboard/i-dashboard.html', context={'jobs': jobs.all()})
+
+
+def base(request):
+    return render(request, 'partials/base.html')

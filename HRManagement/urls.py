@@ -13,18 +13,25 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from django.conf.urls.static import static
+from django.conf import settings
 from django.contrib import admin
 from django.urls import path, include
+
 from Dashboard.urls import index
+from Dashboard.views.views import base
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('user/', include('Account.urls'), name='user'),
-    path('dashboard/', include('Dashboard.urls'), name="dashboard"),
-    path('jobs/', include('Job.urls'), name="jobs"),
+                  path('base/', base),
+                  path('admin/', admin.site.urls),
+                  path('user/', include('Account.urls'), name='user'),
+                  path('dashboard/', include('Dashboard.urls'), name="dashboard"),
+                  path('jobs/', include('Job.urls'), name="jobs"),
 
-    path('', index, name="index"),
-    path('vacancy/', include('Vacancy.urls'), name="vacancy"),
-    path('exam/', include('Exam.urls'), name="exam"),
+                  path('', index, name="index"),
+                  path('vacancy/', include('Vacancy.urls'), name="vacancy"),
+                  path('exam/', include('Exam.urls'), name="exam"),
 
-]
+                  path('question/', include('Question.urls'), name="question"),
+
+              ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

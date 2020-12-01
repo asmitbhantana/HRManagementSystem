@@ -4,7 +4,7 @@ from django.contrib.auth import authenticate, login, logout, get_user_model
 from django.shortcuts import redirect
 from django.views.generic import FormView, ListView, UpdateView
 from django.urls import reverse_lazy
-from .forms import UserLoginForm, UserSignupForm
+from .forms import UserLoginForm, UserSignupForm, UserUpdateForm
 
 User = get_user_model()
 
@@ -62,6 +62,8 @@ class UserSignupView(FormView):
 class ListUserView(ListView):
     model = User
     template_name = 'Account/list-user.html'
+    queryset = User.objects.all()
+    context_object_name = 'user_list'
 
     def get(self, request, *args, **kwargs):
         if request.user.user_position != 'HR':
@@ -73,4 +75,5 @@ class ListUserView(ListView):
 class EditUserView(UpdateView):
     model = User
     template_name = 'Account/edit-user.html'
-    form_class = User
+    form_class = UserUpdateForm
+    success_url = reverse_lazy('user:list')

@@ -1,23 +1,18 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'Dashboard/base-dashboard.html' %}
+{% block title_block %}
+    HR Dashboard
+{% endblock title_block%}
 {% if user.is_authenticated %}
     <a href="{% url "user:logout" %}">Logout</a>
     <a href="{% url 'jobs:create-job' %}" >Add job</a>
-    <a href="{% url 'jobs:create-job' %}" >Edit users</a>
+    <a href="{% url 'user:list' %}" >All User users</a>
     <h3>Welcome {{ user.username }},</h3>
     <hr>
     <h4>Opened Vacancy</h4>
     {% include 'Job/list-job.html' %}
     <hr>
-    <h4>Interviewee Applied:</h4>
+    {% include 'Dashboard/applicant-list.html' %}
 
 {% else %}
     <a href="{% url "user:login" %}">Login</a>
 {% endif %}
-</body>
-</html>
